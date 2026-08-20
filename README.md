@@ -1,3 +1,23 @@
+# ScBRCStates
+
+ScBRCStates applies the breast cancer malignant-cell classifier described in Rott et al. to new scRNA-seq datasets.
+
+<p align="center">
+  <img src="images/scbrcstates_workflow.png" alt="ScBRCStates workflow" width="900">
+</p>
+
+The input is an `AnnData` object containing malignant cells. Genes are matched using `adata.var_names` and the 1000 HVGs of the HGB classifier. Model genes absent from the dataset are assigned an expression value of 0 before the same rank transformation used during classifier development.
+
+ScBRCStates assigns each malignant cell to one of five transcriptional states:
+
+| Cluster | State |
+|---|---|
+| `C0` | Baseline |
+| `C1_4_6` | Stress |
+| `C2` | EMT |
+| `C3` | Proliferative |
+| `C5` | Trogocytosis-like |
+
 ## Installation
 
 To avoid dependency conflicts, we recommend installing ScBRCStates in a dedicated environment.
