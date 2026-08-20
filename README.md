@@ -1,12 +1,22 @@
-# ScBRCStates
-
-ScBRCStates applies the breast cancer malignant-cell classifier described in Rott et al. to new scRNA-seq datasets.
-
-The input is an `AnnData` object containing malignant cells. Genes are matched using `adata.var_names`. Model genes absent from the dataset are assigned an expression value of 0 before the same rank transformation used during classifier development.
-
 ## Installation
 
-Clone the repository and install it from the repository root:
+To avoid dependency conflicts, we recommend installing ScBRCStates in a dedicated environment.
+
+Using Conda:
+
+```bash
+conda create -n scbrcstates python=3.11.7
+conda activate scbrcstates
+```
+
+Clone the repository:
+
+```
+git clone https://github.com/que-ro/ScBRCStates.git
+cd ScBRCStates
+```
+
+Then install it from the repository root:
 
 ```bash
 pip install .
@@ -14,36 +24,27 @@ pip install .
 
 For development/testing:
 
-```bash
+```
+bash
 pip install -e ".[test]"
 ```
 
-## Add the classifier
+ScBRCStates was developed and tested with:
 
-Copy the classifier used in the paper to:
-
-```text
-src/scbrcstates/models/scbrcstates_hgb.joblib
-```
-
-The joblib file is expected to contain the same objects used in the analysis:
-
-```python
-{
-    "model": ...,
-    "label_encoder": ...,
-    "genes": ...,
-    "config": ...,
-}
-```
+* Python 3.11.7
+* anndata 0.10.8
+* joblib 1.3.2
+* numpy 1.23.5
+* scipy 1.11.4
+* scikit-learn 1.3.2
 
 ## Python usage
 
 ```python
-import scanpy as sc
+import anndata as ad
 from scbrcstates import annotate
 
-adata = sc.read_h5ad("malignant_cells.h5ad")
+adata = ad.read_h5ad("malignant_cells.h5ad")
 annotate(adata)
 
 print(adata.obs["predicted_cluster"].value_counts())
@@ -77,11 +78,23 @@ scbrcstates input.h5ad output.h5ad --key ScBRCStates
 scbrcstates input.h5ad output.h5ad --layer log1p
 ```
 
+## Citation
+
+If you use ScBRCStates in published work, please cite:
+
+Rott Q. et al. [Paper title]. [Journal, year, DOI]
+
+## License
+
+ScBRCStates is distributed under the MIT License.
+
 ## Input
 
 ScBRCStates is intended for malignant breast cancer cells. It does not identify malignant cells itself.
 
 `adata.var_names` must contain unique gene names. Genes that are not part of the classifier are ignored. Classifier genes absent from the input dataset are kept at 0 before ranking.
+
+The expression matrix should correspond to the same type of expression values used during classifier development. Scaled or centered expression matrices should not be used.
 
 The prediction preprocessing is intentionally kept identical to the original analysis:
 
@@ -97,7 +110,7 @@ The prediction preprocessing is intentionally kept identical to the original ana
 Run:
 
 ```bash
-pytest
+python -m pytest
 ```
 
 The tests check that the packaged preprocessing reproduces the original prediction code, including reordered genes and missing genes, and that predictions are correctly added to `adata.obs`.
