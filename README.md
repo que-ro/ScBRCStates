@@ -116,7 +116,7 @@ ScBRCStates is intended for malignant breast cancer cells. It does not identify 
 
 The expression matrix should correspond to the same type of expression values used during classifier development. Scaled or centered expression matrices should not be used.
 
-The prediction preprocessing is intentionally kept identical to the original analysis:
+The prediction preprocessing is :
 
 1. keep model genes present in the dataset;
 2. add absent model genes with expression 0;
