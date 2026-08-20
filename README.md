@@ -1,12 +1,12 @@
 # ScBRCStates
 
-ScBRCStates applies the breast cancer malignant-cell classifier described in Rott et al. to new scRNA-seq datasets.
+ScBRCStates enables the classification of malignant breast cancer cells in new scRNA-seq datasets using the classifier described by Rott et al.based on 1,000 HVGs.
 
 <p align="center">
   <img src="images/scbrcstates_workflow.png" alt="ScBRCStates workflow" width="900">
 </p>
 
-The input is an `AnnData` object containing malignant cells. Genes are matched using `adata.var_names` and the 1000 HVGs of the HGB classifier. Model genes absent from the dataset are assigned an expression value of 0 before the same rank transformation used during classifier development.
+The input is an `AnnData` object containing malignant cells. Genes are matched between `adata.var_names` and the 1,000 highly variable genes (HVGs) used by the HistGradient Boosting (HGB) classifier. Genes from the model that are absent from the input dataset are assigned an expression value of 0 before applying the same rank transformation used during classifier development.
 
 ScBRCStates assigns each malignant cell to one of five transcriptional states:
 
@@ -101,7 +101,9 @@ scbrcstates input.h5ad output.h5ad --layer log1p
 
 If you use ScBRCStates in published work, please cite:
 
-Rott Q. et al. [Paper title]. [Journal, year, DOI]
+Large-scale single-cell integration in breast cancer reveals recurrent malignant cell states, tractable biomarkers and a rare population suggestive of trogocytosis
+Quentin ROTT, Guillaume DESANDRE, Celia SEQUERA HURTADO, Christophe GINESTIER, Emmanuelle CHARAFE-JAUFFRET, Jean-Paul Borg, Flavio MAINA, Laurence CHOULIER*, Odile LECOMPTE*
+(Submission in progress for Jounral and DOI)
 
 ## License
 
