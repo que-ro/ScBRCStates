@@ -15,11 +15,11 @@ def test_classifier_labels():
     adata = ad.read_h5ad("tests/data/example_adata.h5ad")
     annotate(adata)
     expected_labels = {
-        "0",
-        "1_4_6",
-        "2",
-        "3",
-        "5",
+        "C0",
+        "C1_4_6",
+        "C2",
+        "C3",
+        "C5",
     }
     observed_labels = set(adata.obs["predicted_cluster"])
     assert observed_labels.issubset(expected_labels)

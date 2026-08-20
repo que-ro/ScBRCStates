@@ -93,6 +93,10 @@ def annotate(
         predictions.append(label_encoder.inverse_transform(y))
 
     adata.obs[key_added] = np.concatenate(predictions)
+    adata.obs[key_added] = [
+        f"C{x}" if not str(x).startswith("C") else str(x)
+        for x in np.concatenate(predictions)
+    ]
 
     if verbose:
         print(f"Predictions stored in adata.obs['{key_added}']")
