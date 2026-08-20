@@ -44,8 +44,7 @@ pip install .
 
 For development/testing:
 
-```
-bash
+```bash
 pip install -e ".[test]"
 ```
 
