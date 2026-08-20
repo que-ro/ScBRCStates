@@ -102,7 +102,9 @@ scbrcstates input.h5ad output.h5ad --layer log1p
 If you use ScBRCStates in published work, please cite:
 
 Large-scale single-cell integration in breast cancer reveals recurrent malignant cell states, tractable biomarkers and a rare population suggestive of trogocytosis
+
 Quentin ROTT, Guillaume DESANDRE, Celia SEQUERA HURTADO, Christophe GINESTIER, Emmanuelle CHARAFE-JAUFFRET, Jean-Paul Borg, Flavio MAINA, Laurence CHOULIER*, Odile LECOMPTE*
+
 (Submission in progress for Jounral and DOI)
 
 ## License
